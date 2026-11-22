@@ -1,0 +1,42 @@
+﻿@model IEnumerable<UserSocial.Core.Models.Domains.Button>
+
+<div id="buttonlTable">
+@if (Model != null && Model.Any())
+{
+        <table class="table table-hover table-striped mt-3 mb-5">
+            <thead>
+                <tr>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Adres</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var button in Model)
+                {
+                    <tr>
+                        <td>@button.Name</td>
+                        <td>@button.Url</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm"
+                               href="@Url.Action("Buttons", "Button", new { id = button.Id })">
+                                Edytuj
+                            </a>
+                           
+                            <button class="btn btn-danger btn-sm" onclick="deleteButton('@button.Id',this)">
+                                Usuń
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        }
+        else
+        {
+        <div>
+            Brak przycisków.
+        </div>
+}
+</div>

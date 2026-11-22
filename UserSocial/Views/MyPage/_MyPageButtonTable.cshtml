@@ -1,0 +1,14 @@
+﻿@model IEnumerable<UserSocial.Core.Models.Domains.Button>
+
+<div id="MyPageButtonTable">
+@if (Model != null && Model.Any())
+{
+       
+                @foreach (var button in Model)
+                {
+                    <a href="https://@button.Url" target="_blank" class="btn btn-primary m-2" style="width: 400px; background-color: @button.Color; display: block;">
+                        @button.Name
+                    </a>
+                }
+}
+</div>

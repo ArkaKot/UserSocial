@@ -1,0 +1,48 @@
+﻿@model UserSocial.Core.ViewModels.ButtonViewModel
+
+@{
+    ViewData["Title"] = "Moje Przyciski";
+}
+
+<h1>Moje Przyciski</h1>
+
+<div id="linkSocialTable">
+    @await Html.PartialAsync("_ButtonTable.cshtml", Model.Buttons)
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+
+        function deleteButton(id, btn) {
+            if (!confirm("Czy na pewno chcesz usunąć przycisk?"))
+                return;
+
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Delete", "Button")",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.success) {
+                        var row = btn.parentNode.parentNode;
+                        row.parentNode.removeChild(row);
+                    }
+                    else {
+                        alert(data.message);
+                    }
+                },
+                error: function (data) {
+                    alert(data.message)
+                },
+                dataType: "json"
+            });
+        
+        }
+    </script>
+    }

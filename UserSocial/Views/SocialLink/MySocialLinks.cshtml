@@ -1,0 +1,32 @@
+﻿@model UserSocial.Core.ViewModels.SocialLinkViewModel
+
+@{
+    ViewData["Title"] = "Dodaj Link";
+}
+
+<h1>Dodaj Link</h1>
+
+
+
+@using (Html.BeginForm("MySocialLinks", "SocialLink"))
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.LinkSocial.Id)
+    @Html.HiddenFor(x => x.LinkSocial.UserId)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.LinkSocial.Title)
+        @Html.TextBoxFor(x => x.LinkSocial.Title, new { @class = "form-control", maxLength = "6" })
+        @Html.ValidationMessageFor(x => x.LinkSocial.Title)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.LinkSocial.Link)
+        @Html.TextAreaFor(x => x.LinkSocial.Link, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.LinkSocial.Link)
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg mt-2">Zapisz</button>
+}

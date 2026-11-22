@@ -1,0 +1,45 @@
+﻿@model UserSocial.Core.ViewModels.ButtonViewModel
+
+@{
+    ViewData["Title"] = "Dodaj Przycisk";
+}
+
+<h1>Dodaj Przycisk</h1>
+
+
+
+@using (Html.BeginForm("Buttons", "Button"))
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.Button.Id)
+    @Html.HiddenFor(x => x.Button.UserId)
+    @Html.HiddenFor(x => x.Button.User)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Button.Name)
+        @Html.TextBoxFor(x => x.Button.Name, new { @class = "form-control", maxLength = "20" })
+        @Html.ValidationMessageFor(x => x.Button.Name)
+    </div>
+
+     <div class="form-group">
+        @Html.LabelFor(x => x.Button.Url)
+        @Html.TextAreaFor(x => x.Button.Url, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Button.Url)
+    </div>
+
+    <div class="form-group">
+        <label>Kolor przycisku</label>
+
+        <select asp-for="Button.Color" class="form-control">
+            <option value="">-- Wybierz kolor --</option>
+            <option value="Red">Czerwony</option>
+            <option value="Blue">Niebieski</option>
+            <option value="Green">Zielony</option>
+            <option value="Orange">Pomarańczowy</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg mt-2">Zapisz</button>
+}

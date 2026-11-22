@@ -1,0 +1,37 @@
+﻿@model UserSocial.Core.Models.Domains.ApplicationUser
+
+@{
+    ViewData["Title"] = "Uzupełnij profil";
+}
+
+<h1>Uzupełnij profil</h1>
+
+
+
+@using (Html.BeginForm("UserCompleteProfile", "Users"))
+{
+
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.NameAccount)
+        @Html.TextBoxFor(x => x.NameAccount, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.NameAccount)
+    </div>
+
+     <div class="form-group">
+        @Html.LabelFor(x => x.Description)
+        @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Description)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Picture)
+        @Html.TextBoxFor(x => x.Picture, new { @class = "form-control",
+        placeholder = "https://przykladowastrona.com/zdjecie.jpg"})
+        @Html.ValidationMessageFor(x => x.Picture)
+    </div> 
+
+    <button type="submit" class="btn btn-primary btn-lg mt-2">Zapisz</button>
+}

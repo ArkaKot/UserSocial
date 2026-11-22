@@ -1,0 +1,29 @@
+﻿@model UserSocial.Core.Models.Domains.ApplicationUser
+
+@{
+    ViewData["Title"] = "MyPage";
+}
+
+<h1 class="mb-3">Moja Strona</h1>
+
+<div class="d-flex justify-content-center align-items-center mt-5" style="gap: 30px;">
+    <img src="@Model.Picture"
+         width="150"
+         height="150"
+         style=" width:200px; height: 200px; border-radius: 50%" />
+
+    <div class="d-flex flex-column">
+        <h2>@Model.UserName</h2>
+        <p style="white-space: pre-line;">@Model.Description</p>
+    </div>
+</div>
+
+
+<div id="MyPageButtonTable" class="d-flex justify-content-center mt-4">
+    @await Html.PartialAsync("_MyPageButtonTable.cshtml", Model.Buttons)
+</div>
+
+<div id="MyPageLinkSocialTable" class="d-flex justify-content-center mt-3">
+    @await Html.PartialAsync("_MyPageLinkSocialTable.cshtml", Model.LinkSocials)
+</div>
+

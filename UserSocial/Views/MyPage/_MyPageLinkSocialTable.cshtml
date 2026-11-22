@@ -1,0 +1,14 @@
+﻿@model IEnumerable<UserSocial.Core.Models.Domains.LinkSocial>
+
+<div id="MyPageLinkSocialTable">
+@if (Model != null && Model.Any())
+{
+       
+                @foreach (var linkSocial in Model)
+                {
+                    <a href="https://@linkSocial.Link" target="_blank" class="btn btn-primary m-2" style="width: 80px;">
+                        @linkSocial.Title
+                    </a>
+                }
+}
+</div>

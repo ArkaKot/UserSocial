@@ -1,0 +1,52 @@
+﻿@model UserSocial.Core.ViewModels.UsersViewModel
+
+@{
+    ViewData["Title"] = "Użytkownicy";
+}
+
+<h1 class="mb-3">5 Użytkowników</h1>
+
+<form id="filterForm">
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            @Html.TextBoxFor(x => x.FilterTasks.Email,
+            new { @class = "form-control mb-2", placeholder = "Wyszukaj użytkownika" })
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Szukaj</button>
+        </div>
+    </div>
+</form>
+
+<div id="userTableContainer">
+    @await Html.PartialAsync("_UsersTable.cshtml", Model.Users)
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('#filterForm').submit(function() {
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Users", "Users")",
+                    data: $(this).serialize(),
+                    success: function(data) {
+                        $('#userTableContainer').html(data);
+                    },
+                    error: function(data) {
+                       alert(data.message)
+                    },
+                    dataType: "html"
+                });
+
+                return false;
+
+            });
+
+        });
+    </script>
+}
+

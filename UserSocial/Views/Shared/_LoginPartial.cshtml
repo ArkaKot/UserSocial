@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using UserSocial.Core.Models.Domains
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity?.Name</a>
+    </li>
+    <li>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Moje Menu
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" asp-controller="MyPage" asp-action="MyPage" asp-route-Name="@User.Identity.Name">Moja Strona</a></li>
+                    <li><a class="dropdown-item" asp-controller="Button" asp-action="Button">Moje Przyciski</a></li>
+                    <li><a class="dropdown-item" asp-controller="SocialLink" asp-action="MySocialLink">Moje Linki</a></li>
+                    <li><a class="dropdown-item" asp-controller="Button" asp-action="Buttons">Dodaj Przycisk</a></li>
+                    <li><a class="dropdown-item" asp-controller="SocialLink" asp-action="MySocialLinks">Dodaj Link</a></li>
+            
+                </ul>
+            </div>
+    </li>
+     <li>
+            <a class="nav-link text-dark" asp-controller="Users" asp-action="UserCompleteProfile">Uzupełnij Profil</a>
+    </li>
+    <li class="nav-item">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+        </form>
+    </li>
+       
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Zarejestruj</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Zaloguj</a>
+    </li>
+}
+</ul>
+
